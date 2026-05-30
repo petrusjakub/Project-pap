@@ -2,7 +2,7 @@
   "id": "FEAT-001",
   "type": "feat",
   "description": "Create the complete index.html file for ProActive Plus (PAP) product page with all tabs, calculator, and styling based on index (17).html reference layout",
-  "status": "in_progress",
+  "status": "completed",
   "steps": [
     "Step 1: Create index.html with the same CSS/layout structure as 'index (17).html' but rebrand for ProActive Plus. Key changes: (a) Title/header becomes 'ProActive Plus (PAP) - Asuransi Jiwa Berjangka | Manulife Indonesia', (b) WA banner text stays 'Petrus Jakub Partner Bisnis Manulife' + WA logo + '087781896087', (c) WA link target becomes 'https://wa.me/6287781896087?text=Pak%20Petrus%2C%20saya%20mau%20tanya%20soal%20Asuransi%20ProActive%20Plus', (d) Color scheme stays green (#00a758, #006838)",
     "Step 2: Create Tab 1 'Ringkasan Produk' with content from product materials: What is PAP (term life insurance from Manulife), key features (6 keunggulan: Proteksi Optimal, Premi Terjangkau, Masa Pertanggungan Fleksibel, Jaminan Premi Tetap, Dapat Diperpanjang, Pilihan Mata Uang), product specifications (age range, term options, min premiums, currency options), and available riders (ADDB, Medicare Plus, Waiver of Premium). Use simple language for laypersons.",
@@ -35,5 +35,5 @@
     "Run: python3 -c \"content=open('/projects/sandbox/Project-pap/index.html').read(); assert content.count('tab-content') >= 7; print('All tabs present')\""
   ],
   "blocked_reason": null,
-  "findings": ""
+  "findings": "Premium rate formula: rate * (UP / 1,000,000) * 1000 gives correct results (e.g., rate 3.0, UP 1B = Rp 3,000,000). The rate unit is effectively per-mille (rate/1000 applied to UP). No build/test commands needed as this is a static HTML file. All verification tests pass. The file is 87KB including embedded premium data (~47KB of JSON rate tables)."
 }
