@@ -2,7 +2,7 @@
   "id": "FEAT-002",
   "type": "fix",
   "description": "Fix 3 review issues: setSA implicit event reference, remove unused premium_data.json, add minimum premium validation",
-  "status": "in_progress",
+  "status": "completed",
   "steps": [
     "Step 1: Fix setSA function to accept btn parameter instead of using implicit event.target",
     "Step 2: Update all onclick handlers for setSA to pass 'this' as second argument",
@@ -21,5 +21,5 @@
     "Run: python3 -c \"content=open('/projects/sandbox/Project-pap/index.html').read(); assert '4000000' in content or '4.000.000' in content; print('Minimum premium check present')\""
   ],
   "blocked_reason": null,
-  "findings": null
+  "findings": "All 3 review issues resolved. setSA now accepts a btn parameter and uses btn.classList.add('active') with a null guard. All 7 onclick handlers pass 'this'. premium_data.json removed via git rm. Minimum premium warning shows when annualPremium < 4000000 with yellow info box below the Detail Perhitungan section."
 }
