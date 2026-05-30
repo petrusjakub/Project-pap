@@ -302,13 +302,13 @@ body{padding-top:0}
 
 <p style="font-size:.82rem;color:#777;margin-bottom:8px">Pilih cepat Uang Pertanggungan:</p>
 <div class="quick-amounts">
-<button class="quick-amt" onclick="setSA(100000000)">100 Juta</button>
-<button class="quick-amt" onclick="setSA(250000000)">250 Juta</button>
-<button class="quick-amt" onclick="setSA(500000000)">500 Juta</button>
-<button class="quick-amt active" onclick="setSA(1000000000)">1 Miliar</button>
-<button class="quick-amt" onclick="setSA(2000000000)">2 Miliar</button>
-<button class="quick-amt" onclick="setSA(3000000000)">3 Miliar</button>
-<button class="quick-amt" onclick="setSA(5000000000)">5 Miliar</button>
+<button class="quick-amt" onclick="setSA(100000000, this)">100 Juta</button>
+<button class="quick-amt" onclick="setSA(250000000, this)">250 Juta</button>
+<button class="quick-amt" onclick="setSA(500000000, this)">500 Juta</button>
+<button class="quick-amt active" onclick="setSA(1000000000, this)">1 Miliar</button>
+<button class="quick-amt" onclick="setSA(2000000000, this)">2 Miliar</button>
+<button class="quick-amt" onclick="setSA(3000000000, this)">3 Miliar</button>
+<button class="quick-amt" onclick="setSA(5000000000, this)">5 Miliar</button>
 </div>
 
 <div id="calcResults"></div>
@@ -584,12 +584,12 @@ function formatSA(input) {
     }
 }
 
-function setSA(amount) {
+function setSA(amount, btn) {
     document.getElementById('sumAssured').value = formatNumber(amount);
     // Update quick amount buttons
     var btns = document.querySelectorAll('.quick-amt');
     btns.forEach(function(b){ b.classList.remove('active'); });
-    event.target.classList.add('active');
+    if (btn) btn.classList.add('active');
     calculate();
 }
 
@@ -728,6 +728,14 @@ function calculate() {
     html += '<p><strong>Uang Pertanggungan:</strong> Rp ' + formatNumber(sa) + '</p>';
     html += '<p><strong>Rumus:</strong> ' + rate + ' x (' + formatNumber(sa) + ' / 1.000.000) x 1.000 = Rp ' + formatNumber(annualPremium) + ' per tahun</p>';
     html += '</div>';
+    
+    // Minimum premium warning
+    if (annualPremium < 4000000) {
+        html += '<div style="background:#fff3cd;border:1px solid #ffc107;border-radius:8px;padding:12px 16px;margin-top:16px;color:#856404;font-size:.9rem;">';
+        html += '<strong>\u26A0 Catatan:</strong> Premi minimum tahunan ProActive Plus adalah Rp 4.000.000. ';
+        html += 'Silakan tingkatkan Uang Pertanggungan untuk memenuhi syarat minimum premi.';
+        html += '</div>';
+    }
     
     resultsDiv.innerHTML = html;
 }

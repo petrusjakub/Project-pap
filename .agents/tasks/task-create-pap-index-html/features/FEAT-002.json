@@ -1,0 +1,25 @@
+{
+  "id": "FEAT-002",
+  "type": "fix",
+  "description": "Fix 3 review issues: setSA implicit event reference, remove unused premium_data.json, add minimum premium validation",
+  "status": "in_progress",
+  "steps": [
+    "Step 1: Fix setSA function to accept btn parameter instead of using implicit event.target",
+    "Step 2: Update all onclick handlers for setSA to pass 'this' as second argument",
+    "Step 3: Remove premium_data.json from the repository using git rm",
+    "Step 4: Add minimum annual premium validation (Rp 4,000,000) with warning note below results"
+  ],
+  "acceptance_criteria": [
+    "setSA function does not reference implicit event global",
+    "All setSA onclick handlers pass the button element as second argument",
+    "premium_data.json is removed from the repository",
+    "Calculator shows warning when annual premium < Rp 4,000,000"
+  ],
+  "verification": [
+    "Run: python3 -c \"content=open('/projects/sandbox/Project-pap/index.html').read(); assert 'event.target' not in content; print('No implicit event reference')\"",
+    "Run: python3 -c \"import os; assert not os.path.exists('/projects/sandbox/Project-pap/premium_data.json'); print('premium_data.json removed')\"",
+    "Run: python3 -c \"content=open('/projects/sandbox/Project-pap/index.html').read(); assert '4000000' in content or '4.000.000' in content; print('Minimum premium check present')\""
+  ],
+  "blocked_reason": null,
+  "findings": null
+}
